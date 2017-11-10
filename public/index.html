@@ -17,31 +17,33 @@
   <body>
 
     <div class="column">
+      <span class="cc-old-dkk"></span>
       <span class="cc-basic-dkk"></span>
       <span class="cc-basic-nok"></span>
       <span class="cc-basic-eur-dkk"></span>
     </div>
 
     <script>
+     addCurrencyConverter('cc-old-dkk', 799.00, 'DKK', 'Se vejl. pris i DKK')
      addCurrencyConverter({
        target: 'cc-basic-dkk',
        amount: 799.00,
-       to: 'DKK',
        from: 'GBP',
+       to: 'DKK',
        label: 'GBP -> DKK'
      })
      addCurrencyConverter({
        target: 'cc-basic-nok',
        amount: 799.00,
-       to: 'NOK',
        from: 'GBP',
+       to: 'NOK',
        label: 'GBP -> NOK'
      })
      addCurrencyConverter({
        target: 'cc-basic-eur-dkk',
        amount: 799.00,
-       to: 'DKK',
        from: 'EUR',
+       to: 'DKK',
        label: 'EUR -> DKK'
      })
     </script>
