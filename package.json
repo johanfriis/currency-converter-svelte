@@ -1,0 +1,24 @@
+{
+  "name": "currency-converter",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "serve public & rollup -c -w",
+    "start": "serve public"
+  },
+  "engines": {
+    "node": "8.9.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "rollup": "latest",
+    "rollup-plugin-buble": "latest",
+    "rollup-plugin-commonjs": "latest",
+    "rollup-plugin-node-resolve": "latest",
+    "rollup-plugin-svelte": "latest",
+    "rollup-plugin-uglify": "latest",
+    "rollup-watch": "latest",
+    "serve": "latest"
+  }
+}

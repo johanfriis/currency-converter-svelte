@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Svelte Currency Converter</title>
+    <script src="bundle.js"></script>
+    <style>
+     .column {
+       margin: 50px auto;
+       width: 400px;
+     }
+     .column span {
+       margin: 10px 0;
+     }
+    </style>
+  </head>
+  <body>
+
+    <div class="column">
+      <span class="cc-basic-dkk"></span>
+      <span class="cc-basic-nok"></span>
+      <span class="cc-basic-eur-dkk"></span>
+    </div>
+
+    <script>
+     addCurrencyConverter({
+       target: 'cc-basic-dkk',
+       amount: 799.00,
+       to: 'DKK',
+       from: 'GBP',
+       label: 'GBP -> DKK'
+     })
+     addCurrencyConverter({
+       target: 'cc-basic-nok',
+       amount: 799.00,
+       to: 'NOK',
+       from: 'GBP',
+       label: 'GBP -> NOK'
+     })
+     addCurrencyConverter({
+       target: 'cc-basic-eur-dkk',
+       amount: 799.00,
+       to: 'DKK',
+       from: 'EUR',
+       label: 'EUR -> DKK'
+     })
+    </script>
+
+  </body>
+</html>

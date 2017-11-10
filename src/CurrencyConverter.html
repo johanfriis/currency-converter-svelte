@@ -1,0 +1,137 @@
+{{#if result}}
+  <span class="convert-currency">{{result}},- {{to}}</span>
+{{else}}
+  <span on:click="convertCurrency()" class="convert-currency convert-currency-button">
+    {{#if loading}}
+      <div class="currency-spinner">
+        <div class="currency-bounce1"></div>
+        <div class="currency-bounce2"></div>
+        <div class="currency-bounce3"></div>
+      </div>
+    {{else}}
+      {{label}}
+    {{/if}}
+  </span>
+{{/if}}
+
+<style>
+  .convert-currency {
+    border-radius: 300px;
+    padding: 4px 12px;
+    font-size: 14px;
+    font-family: futura-pt;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    background-color: #b7772d;
+    border-color: #b7772d;
+    display: inline-block;
+    width: 81%;
+    height: auto;
+    border-width: 0;
+    text-align: center;
+    text-decoration: none;
+    line-height: normal;
+  }
+  .convert-currency-button {
+    padding: 4px 12px;
+    font-size: 14px;
+    -webkit-transition: .1s opacity linear;
+    -moz-transition: .1s opacity linear;
+    -o-transition: .1s opacity linear;
+    transition: .1s opacity linear;
+    -webkit-backface-visiblility: hidden;
+    opacity: 1;
+    cursor: pointer;
+  }
+  .convert-currency-button:hover {
+    opacity: .8;
+  }
+
+
+  .currency-spinner > div {
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    margin: 0 1px;
+    position: relative;
+    top: 0px;
+
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: sk-currency-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-currency-bouncedelay 1.4s infinite ease-in-out both;
+  }
+
+  .currency-spinner .currency-bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+
+  .currency-spinner .currency-bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
+
+  @-webkit-keyframes sk-currency-bouncedelay {
+    0%, 80%, 100% { -webkit-transform: scale(0.1) }
+    40% { -webkit-transform: scale(1.0) }
+  }
+
+  @keyframes sk-currency-bouncedelay {
+    0%, 80%, 100% {
+      -webkit-transform: scale(0.1);
+      transform: scale(0);
+    } 40% {
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
+    }
+  }
+</style>
+
+<script>
+
+  const fetchRates = (base, symbols) => {
+    return fetch(`http://api.fixer.io/latest?base=${base}&symbols=${symbols}`)
+      .then(res => res.json())
+  }
+
+  const convert = (amount, _from, to) => {
+    return new Promise((resolve, reject) => {
+      fetchRates(_from, to)
+        .then(({rates}) => {
+          const rate = rates[to]
+          const result = (amount * rate).toFixed(0)
+          resolve(result)
+        })
+    })
+  }
+
+  export default {
+    data() {
+      return {
+        loading: false,
+        amount: 0,
+        from: null,
+        to: null,
+        label: '',
+        result: null,
+      }
+    },
+
+    methods: {
+      convertCurrency () {
+        this.set({loading: true})
+        const amount = this.get('amount')
+        const to = this.get('to')
+        const _from = this.get('from')
+        convert(amount, _from, to)
+          .then(result => {
+            this.set({ result, loading: false })
+          })
+          .catch(error => console.log(error))
+      }
+    }
+  }
+</script>
