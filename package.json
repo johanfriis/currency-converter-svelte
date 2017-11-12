@@ -5,7 +5,9 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "serve public & rollup -c -w",
-    "start": "serve public"
+    "start": "serve public",
+    "deploy": "npm run build && cd public && now -p && cd ..",
+    "alias": "cd public && now alias && cd .."
   },
   "engines": {
     "node": "8.9.0"
