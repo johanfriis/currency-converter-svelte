@@ -8,4 +8,4 @@ Built with [1].
 Uses [2] as source for exchange rates
 
 [1]: https://svelte.technology
-[2]: http://fixer.io
+[2]: https://exchangeratesapi.io
